@@ -684,7 +684,36 @@
       color: var(--text);
       margin-bottom: 1rem;
     }
+
+    /* Terminal Styles */
+    .terminal-section {
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .terminal-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      margin-bottom: 1rem;
+    }
+
+    .terminal-toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
   </style>
+  <link rel="stylesheet" href="terminal.css">
 </head>
 <body>
   <input type="checkbox" id="dark-mode-toggle">
@@ -730,6 +759,30 @@
         <a href="#" class="social-link" title="Email">📧</a>
         <a href="#" class="social-link" title="Twitter">🐦</a>
         <a href="#" class="social-link" title="LinkedIn">💼</a>
+      </div>
+    </div>
+
+    <!-- Interactive Terminal -->
+    <div class="terminal-section">
+      <button id="toggle-terminal" class="terminal-toggle-btn">
+        <span class="terminal-icon">></span>
+        Open Interactive Terminal
+      </button>
+      
+      <div id="terminal" class="terminal hidden">
+        <div class="terminal-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="title">jon@portfolio:~</span>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+          <div class="line">Welcome to Jon's Interactive Terminal! Type "help" for available commands.</div>
+          <div class="prompt-line">
+            <span class="prompt">guest@jon-vadillo-portfolio:~$</span>
+            <input type="text" id="terminal-input" autofocus autocomplete="off" placeholder="Type a command...">
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1071,6 +1124,7 @@
   </footer>
 
   <script>
+    // Mobile menu functionality
     function toggleMobileMenu() {
       const mobileNav = document.getElementById('mobileNav');
       mobileNav.classList.toggle('active');
@@ -1107,5 +1161,7 @@
       });
     });
   </script>
+  
+  <script src="terminal.js"></script>
 </body>
 </html>
