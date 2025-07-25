@@ -1,0 +1,197 @@
+<!-- Botón para abrir/cerrar el terminal -->
+<button id="toggle-terminal">Open Interactive Terminal</button>
+
+<!-- Terminal visual -->
+<div id="terminal" class="terminal hidden">
+  <div class="terminal-bar">
+    <span class="dot red"></span>
+    <span class="dot yellow"></span>
+    <span class="dot green"></span>
+    <span class="title">jon@portfolio:~</span>
+  </div>
+  <div class="terminal-body" id="terminal-body">
+    <div class="line">Welcome to Jon's Terminal! Type "help" for available commands.</div>
+    <div class="prompt-line">
+      <span class="prompt">guest@jon-vadillo-portfolio:~$</span>
+      <input type="text" id="terminal-input" autofocus autocomplete="off" placeholder="Type a command...">
+    </div>
+  </div>
+</div>
+
+<style>
+  #toggle-terminal {
+    display: block;
+    margin: 2rem auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .terminal {
+    width: 90%;
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #1e1e1e;
+    color: #c5c8c6;
+    font-family: monospace;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #000;
+  }
+  .terminal.hidden {
+    display: none;
+  }
+  .terminal-bar {
+    background: #2d2d2d;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+  }
+  .terminal-bar .dot {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+    display: inline-block;
+  }
+  .terminal-bar .red { background: #ff5f56; }
+  .terminal-bar .yellow { background: #ffbd2e; }
+  .terminal-bar .green { background: #27c93f; }
+  .terminal-bar .title {
+    margin-left: auto;
+    color: #ccc;
+    font-size: 0.9rem;
+  }
+  .terminal-body {
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .line {
+    margin-bottom: 4px;
+  }
+  .prompt-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .prompt {
+    color: #00ff00;
+    margin-right: 5px;
+  }
+  #terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #c5c8c6;
+    font-family: monospace;
+    font-size: 1rem;
+    outline: none;
+    min-width: 200px;
+  }
+</style>
+
+<script>
+const terminal = document.getElementById('terminal');
+const toggleBtn = document.getElementById('toggle-terminal');
+const input = document.getElementById('terminal-input');
+const body = document.getElementById('terminal-body');
+let history = [];
+let historyIndex = -1;
+
+const sections = {
+  experience: ['- Frontend Developer at DevCorp', '- Intern at Webify'],
+  projects: ['- Cleanfolio', '- Terminal Portfolio'],
+  talks: ['- JavaScriptConf 2023', '- React Summit'],
+  awards: ['- Best Dev Portfolio 2024'],
+  learning: ['- Rust', '- DevOps'],
+  about: ['I am a web developer passionate about building clean UIs and learning new tech.']
+};
+
+function printLine(text, color = '') {
+  const div = document.createElement('div');
+  div.className = 'line';
+  if (color) div.style.color = color;
+  div.textContent = text;
+  body.insertBefore(div, input.parentElement);
+  body.scrollTop = body.scrollHeight;
+}
+
+function runCommand(cmd) {
+  const prompt = document.createElement('div');
+  prompt.className = 'line';
+  prompt.innerHTML = '<span class="prompt">guest@jon-vadillo-portfolio:~$</span> ' + cmd;
+  body.insertBefore(prompt, input.parentElement);
+
+  const [command, arg] = cmd.trim().split(' ');
+
+  switch(command) {
+    case 'help':
+      printLine('Available commands:');
+      printLine('  ls [section]   - List contents of a section');
+      printLine('  cat [section]  - Display detailed info about a section');
+      printLine('  pwd            - Show current directory');
+      printLine('  whoami         - Display user info');
+      printLine('  clear          - Clear terminal');
+      printLine('  exit           - Close terminal');
+      printLine('');
+      printLine('Sections: experience, projects, talks, awards, learning, about');
+      break;
+    case 'ls':
+      if (sections[arg]) sections[arg].forEach(item => printLine(item));
+      else printLine('Section not found.', 'red');
+      break;
+    case 'cat':
+      if (sections[arg]) printLine(sections[arg].join('\n'));
+      else printLine('Section not found.', 'red');
+      break;
+    case 'pwd':
+      printLine('/home/guest');
+      break;
+    case 'whoami':
+      printLine('guest');
+      break;
+    case 'clear':
+      [...body.querySelectorAll('.line')].forEach(e => e.remove());
+      break;
+    case 'exit':
+      terminal.classList.add('hidden');
+      break;
+    default:
+      printLine(`command not found: ${command}`, 'red');
+  }
+}
+
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const cmd = input.value.trim();
+    if (cmd) {
+      history.unshift(cmd);
+      historyIndex = -1;
+      runCommand(cmd);
+    }
+    input.value = '';
+  } else if (e.key === 'ArrowUp') {
+    if (historyIndex < history.length - 1) {
+      historyIndex++;
+      input.value = history[historyIndex];
+    }
+  } else if (e.key === 'ArrowDown') {
+    if (historyIndex > 0) {
+      historyIndex--;
+      input.value = history[historyIndex];
+    } else {
+      historyIndex = -1;
+      input.value = '';
+    }
+  }
+});
+
+toggleBtn.addEventListener('click', () => {
+  terminal.classList.toggle('hidden');
+  if (!terminal.classList.contains('hidden')) input.focus();
+});
+</script>

@@ -107,6 +107,10 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
@@ -367,7 +371,7 @@
 
     .awards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1rem;
     }
 
@@ -500,6 +504,68 @@
       text-decoration: underline;
     }
 
+    .pdf-section {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--light-gray);
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .pdf-section.active {
+      display: block;
+    }
+
+    .pdf-section h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem 0;
+      color: var(--text);
+    }
+
+    .pdf-list {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .pdf-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 0.375rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.2s ease;
+    }
+
+    .pdf-item:hover {
+      background: var(--border);
+    }
+
+    .pdf-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pdf-icon {
+      font-size: 1.25rem;
+    }
+
+    .pdf-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .download-icon {
+      font-size: 0.875rem;
+      color: var(--gray);
+    }
+
     .talk-entry {
       background: var(--bg);
       border: none;
@@ -528,10 +594,14 @@
       color: var(--text);
     }
 
-    .talk-content p {
-      margin: 0 0 0.25rem 0;
+    .talk-content p, .talk-content span {
       color: var(--gray);
       font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .talk-content p, .talk-content span {
+      margin: 0 0 0.25rem 0;
     }
 
     .talk-date {
@@ -552,6 +622,22 @@
 
     .talk-link:hover {
       text-decoration: underline;
+    }
+
+    .talk-content .talk-badge {
+      background: var(--light-gray);
+      color: var(--text);
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-right: 0.75rem;
+    }
+
+    .talk-stats {
+      color: var(--gray);
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
     }
 
     .intro-section {
@@ -608,12 +694,12 @@
       
       <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
       <nav>
-        <a href="#">About</a>
-        <a href="#">Experience</a>
-        <a href="#">Projects</a>
-        <a href="#">Talks</a>
-        <a href="#">Learning</a>
-        <a href="#">Contact</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#talks">Talks</a>
+        <a href="#learning">Learning</a>
+        <a href="#contact">Contact</a>
       </nav>
       <label for="dark-mode-toggle" class="theme-toggle">
         <div class="theme-toggle-slider">
@@ -623,17 +709,17 @@
       </label>
     </div>
     <div class="mobile-nav" id="mobileNav">
-      <a href="#">About</a>
-      <a href="#">Experience</a>
-      <a href="#">Projects</a>
-      <a href="#">Talks</a>
-      <a href="#">Learning</a>
-      <a href="#">Contact</a>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#talks">Talks</a>
+      <a href="#learning">Learning</a>
+      <a href="#contact">Contact</a>
     </div>
   </header>
 
   <main>
-    <div class="intro-section">
+    <div class="intro-section" id="about">
       <h1>Hi, I'm Jon Vadillo</h1>
       <p class="intro-text">I am a software developer with over 15 years of experience, specializing in web technologies. I also teach web development, sharing my knowledge with aspiring professionals.</p>
       <p class="intro-text">During my free time, I enjoy experimenting with new technologies, giving talks, and publishing open resources. Travelling is one of my passions, and I have also had the opportunity to volunteer in different places.</p>
@@ -652,7 +738,7 @@
       <span>JavaScript</span><span>HTML</span><span>CSS</span><span>Python</span><span>PHP</span><span>SQL</span><span>Docker</span><span>Git</span><span>NodeJS</span>
     </div> -->
 
-    <h2>Work</h2>
+    <h2 id="experience">Work</h2>
     <div class="work-entry">
       <div class="company-logo" style="background-color: #e11d48;">E</div>
       <div class="work-content">
@@ -724,7 +810,7 @@
       </div>
     </div>
 
-    <h2>Side Projects</h2>
+    <h2 id="projects">Side Projects</h2>
     <div class="grid">
       <div class="project-entry">
         <h3>Traivel</h3>
@@ -814,42 +900,123 @@
       </div>
     </div>
 
-    <h2>Talks</h2>
+    <h2 id="talks">Books & Talks</h2>
     <div class="talk-entry">
       <div class="talk-content">
-        <h3>Inteligencia Artificial al servicio de los desarrolladores</h3>
-        <p>Databeers</p>
-        <a href="#" class="talk-link">📺 Watch Video</a>
+        <h3><span class="talk-badge">📚 BOOK</span>Aprende Python de cero a experto. <span>Published in LeanPub, 6.6K readers.</span></h3>
+      </div>
+      <div class="talk-date">Get it</div>
+    </div>
+    <div class="talk-entry">
+      <div class="talk-content">
+        <h3><span class="talk-badge">📚 BOOK</span>Aprende Laravel 6: guía práctica paso a paso. <span>Published in LeanPub, 370 readers.</span></h3>
+      </div>
+      <div class="talk-date">Get it</div>
+    </div>
+    <div class="talk-entry">
+      <div class="talk-content">
+        <h3><span class="talk-badge">🎤 TALK</span>Inteligencia Artificial al servicio de los desarrolladores. <span>Databeers</span></h3>
       </div>
       <div class="talk-date">Apr 2023</div>
     </div>
     <div class="talk-entry">
       <div class="talk-content">
-        <h3>Construye una aplicación web con Django en 15 minutos</h3>
-        <p>PyDay Chile</p>
-        <a href="#" class="talk-link">📺 Watch Video</a>
+        <h3><span class="talk-badge">🎤 TALK</span>Construye una aplicación web con Django en 15 minutos <span>PyDay Chile</span></h3>
       </div>
       <div class="talk-date">Dec 2020</div>
     </div>
     <div class="talk-entry">
       <div class="talk-content">
-        <h3>Futuro tecnológico de las ciudades inteligentes</h3>
-        <p>Jornadas de Investigación en Ciencias de la Computación</p>
-        <a href="#" class="talk-link">📺 Watch Video</a>
+        <h3><span class="talk-badge">🎤 TALK</span>Futuro tecnológico de las ciudades inteligentes <span>Jornadas Nacionales de Investigación en Ciencias de la Computación</span></h3>
       </div>
       <div class="talk-date">Nov 2013</div>
     </div>
 
-    <h2>Learning Material</h2>
+    <!-- OLD STYLE
+     <div class="talk-entry">
+      <div class="talk-content">
+        <div class="talk-type">
+          <span class="talk-badge">🎤 TALK</span>
+        </div>
+        <h3>Inteligencia Artificial al servicio de los desarrolladores</h3>
+        <p>Databeers</p>
+        <a href="#" class="talk-link">📺 Watch Video</a>
+      </div>
+      <div class="talk-date">Apr 2023</div>
+    </div> -->
+    
+
+    <h2 id="learning">Learning Material</h2>
     <div class="grid">
       <div class="learning-entry">
         <div class="content-type">
           <span class="content-type-icon">📚</span>
-          <span>COURSE</span>
+          <span>CURSO</span>
         </div>
-        <h3>Advanced React Patterns</h3>
-        <p>A comprehensive guide to advanced React patterns including render props, HOCs, and hooks.</p>
-        <a href="#" class="view-material">View Material →</a>
+        <h3>Curso de PHP</h3>
+        <p>Curso de PHP desde la sintaxis básica hasta conceptos más avanzados como la gestión de dependencias, orientación a objetos, acceso a datos o motores de plantillas.</p>
+        <a href="#" class="view-material" onclick="togglePdfSection('php-course'); return false;">View Material →</a>
+        <div id="php-course" class="pdf-section">
+          <h4>📁 Course Materials - Download PDFs</h4>
+          <div class="pdf-list">
+            <a href="learning/php/01-Curso PHP_ Introducción.pdf" class="pdf-item" download>
+              <div class="pdf-info">
+                <span class="pdf-icon">📄</span>
+                <span class="pdf-name">01 - Introducción</span>
+              </div>
+              <span class="download-icon">⬇️</span>
+            </a>
+            <a href="learning/php/02-Curso PHP_ Formularios.pdf" class="pdf-item" download>
+              <div class="pdf-info">
+                <span class="pdf-icon">📄</span>
+                <span class="pdf-name">02 - Formularios</span>
+              </div>
+              <span class="download-icon">⬇️</span>
+            </a>
+            <a href="learning/php/03-Curso PHP_ Sesiones y Cookies.pdf" class="pdf-item" download>
+              <div class="pdf-info">
+                <span class="pdf-icon">📄</span>
+                <span class="pdf-name">03 - Sesiones y Cookies</span>
+              </div>
+              <span class="download-icon">⬇️</span>
+            </a>
+            <a href="learning/php/04-Curso PHP_ Acceso a datos.pdf" class="pdf-item" download>
+              <div class="pdf-info">
+                <span class="pdf-icon">📄</span>
+                <span class="pdf-name">04 - Acceso a datos</span>
+              </div>
+              <span class="download-icon">⬇️</span>
+            </a>
+            <a href="learning/php/04b-Curso PHP_ Organizar el código.pdf" class="pdf-item" download>
+              <div class="pdf-info">
+                <span class="pdf-icon">📄</span>
+                <span class="pdf-name">04b - Organizar el código</span>
+              </div>
+              <span class="download-icon">⬇️</span>
+            </a>
+            <a href="learning/php/05-Curso PHP_ POO.pdf" class="pdf-item" download>
+              <div class="pdf-info">
+                <span class="pdf-icon">📄</span>
+                <span class="pdf-name">05 - POO (Programación Orientada a Objetos)</span>
+              </div>
+              <span class="download-icon">⬇️</span>
+            </a>
+            <a href="learning/php/06-Curso PHP_ Gestión de dependencias.pdf" class="pdf-item" download>
+              <div class="pdf-info">
+                <span class="pdf-icon">📄</span>
+                <span class="pdf-name">06 - Gestión de dependencias</span>
+              </div>
+              <span class="download-icon">⬇️</span>
+            </a>
+            <a href="learning/php/07-Curso PHP_ Motor de plantillas.pdf" class="pdf-item" download>
+              <div class="pdf-info">
+                <span class="pdf-icon">📄</span>
+                <span class="pdf-name">07 - Motor de plantillas</span>
+              </div>
+              <span class="download-icon">⬇️</span>
+            </a>
+          </div>
+        </div>
       </div>
       <div class="learning-entry">
         <div class="content-type">
@@ -889,7 +1056,7 @@
       </div>
     </div>
 
-    <h2>Contact</h2>
+    <h2 id="contact">Contact</h2>
     <p>Open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
     <div class="grid">
       <div class="footer-entry">Email<br>hello@example.com</div>
@@ -909,6 +1076,19 @@
       mobileNav.classList.toggle('active');
     }
 
+    function togglePdfSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      section.classList.toggle('active');
+      
+      // Update the button text
+      const button = section.previousElementSibling;
+      if (section.classList.contains('active')) {
+        button.textContent = 'Hide Material ↑';
+      } else {
+        button.textContent = 'View Material →';
+      }
+    }
+
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
       const mobileNav = document.getElementById('mobileNav');
@@ -917,6 +1097,14 @@
       if (!mobileNav.contains(event.target) && !toggle.contains(event.target)) {
         mobileNav.classList.remove('active');
       }
+    });
+
+    // Close mobile menu when clicking on navigation links
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', function() {
+        const mobileNav = document.getElementById('mobileNav');
+        mobileNav.classList.remove('active');
+      });
     });
   </script>
 </body>
