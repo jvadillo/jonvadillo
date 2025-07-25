@@ -1,0 +1,232 @@
+{
+  "personal": {
+    "name": "Jon Vadillo",
+    "title": "Software Developer & Web Technology Specialist",
+    "subtitle": "Building thoughtful digital experiences and sharing knowledge with the development community.",
+    "description": [
+      "I am a software developer with over 15 years of experience, specializing in web technologies. I also teach web development, sharing my knowledge with aspiring professionals.",
+      "During my free time, I enjoy experimenting with new technologies, giving talks, and publishing open resources. Traveling is one of my passions, and I have also had the opportunity to volunteer in different places.",
+      "I am always eager to learn, explore, and contribute to the tech community."
+    ],
+    "technologies": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Python",
+      "PHP",
+      "SQL",
+      "Docker",
+      "Git",
+      "NoSQL"
+    ],
+    "socialLinks": {
+      "twitter": "https://twitter.com",
+      "linkedin": "https://linkedin.com",
+      "email": "mailto:hello@example.com"
+    }
+  },
+  "experience": [
+    {
+      "title": "Professor and Coordinator",
+      "company": "Egibide",
+      "dates": "Sept. 2017 – Present (7 years 7 months)",
+      "location": "Vitoria-Gasteiz Area, Spain",
+      "responsibilities": [
+        "Digital Industry Bachelor's Degree: Dual education coordinator and Web Engineering professor (Python, JavaScript, HTML, CSS).",
+        "Web Application Development professor in Vocational Education (PHP, JavaScript, HTML, CSS)."
+      ],
+      "skills": ["Laravel", "Python", "Django", "PHP", "CSS", "SQL", "HTML", "JavaScript"]
+    },
+    {
+      "title": "Software Engineer & Co-founder",
+      "company": "Gesto Deportivo",
+      "dates": "Nov. 2017 – Present (7 years 5 months)",
+      "location": "Vitoria-Gasteiz, Basque Country, Spain",
+      "skills": ["Product design", "Frontend", "Backend", "JavaScript"]
+    },
+    {
+      "title": "Development Technical Assistance",
+      "company": "EJIE",
+      "dates": "Sept. 2013 – Sept. 2017 (4 years 1 month)",
+      "location": "Vitoria-Gasteiz, Spain",
+      "responsibilities": [
+        "Full life-cycle application development: analyzing, designing, building, testing, and managing software solutions for the Basque Government's Department of Health."
+      ],
+      "skills": ["Java", "Spring Framework", "CSS", "SQL", "HTML", "JavaScript"]
+    },
+    {
+      "title": "Technical Founder",
+      "company": "Konektik",
+      "dates": "Mar. 2015 – Apr. 2016 (1 year 2 months)",
+      "location": "Vitoria-Gasteiz, Spain",
+      "responsibilities": [
+        "Led Konektik as CEO, defining and communicating the company's vision.",
+        "Developed and implemented strategic direction."
+      ],
+      "technologies": ["JavaScript", "HTML", "CSS", "Node.js", "SQL"]
+    },
+    {
+      "title": "Programmer Analyst",
+      "company": "Necsia (Devoteam | Microsoft Partner)",
+      "dates": "Jun. 2012 – Jan. 2013 (8 months)",
+      "responsibilities": [
+        "Technical analysis and development of web applications in the banking sector.",
+        "Developed a 'High-Performance Web Application Guide' to set frontend development standards."
+      ],
+      "technologies": ["JavaScript (jQuery)", "BackBase Framework", "HTML", "CSS"]
+    },
+    {
+      "title": "Software Engineer (Fullstack)",
+      "company": "WorldSensing S.L.N.E",
+      "dates": "Jul. 2010 – Jun. 2012 (2 years)",
+      "location": "Barcelona, Spain",
+      "responsibilities": [
+        "Led a software development team for wireless sensor networks, managing full-stack feature development using Agile methodologies.",
+        "Solved performance issues and applied cutting-edge performance tools and techniques.",
+        "Developed applications using client-side (GWT, Android) and server-side (Hibernate, Spring, Jersey) Java technologies.",
+        "Proposed and implemented new ideas for products and applications."
+      ]
+    },
+    {
+      "title": "Co-founder & Software Engineer",
+      "company": "Voycontigo",
+      "dates": "Jul. 2009 – Feb. 2011 (1 year 8 months)",
+      "responsibilities": [
+        "Part of the entrepreneurial team that launched a ridesharing web platform.",
+        "Responsible for frontend and backend development."
+      ],
+      "technologies": ["Java Server Pages (JSP)", "Java", "HTML", "CSS", "JavaScript", "MySQL"]
+    },
+    {
+      "title": "Software Developer",
+      "company": "Deusto Mobile Solutions",
+      "dates": "Jun. 2008 – Oct. 2008 (5 months)",
+      "responsibilities": ["Software design and development across different environments and platforms."]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Traivel",
+      "description": "An application that generates complete travel itineraries based on user preferences.",
+      "technologies": ["HTML", "CSS", "Vue.js", "Python", "OpenAI API"]
+    },
+    {
+      "title": "Eureka Girls",
+      "description": "A game designed to introduce inspiring women in the STEM field. The goal is to match women with their achievements (available in single-player or two-player mode).",
+      "technologies": ["HTML", "CSS", "React.js", "Supabase"]
+    },
+    {
+      "title": "Landatu",
+      "description": "An IoT system for sensing and monitoring vegetable gardens.",
+      "technologies": ["Arduino", "Raspberry", "C", "Python", "SQL", "HTML", "CSS", "JS"]
+    },
+    {
+      "title": "Ikasi",
+      "description": "A game to learn words and numbers in Basque (Euskara).",
+      "technologies": ["HTML", "JS", "CSS"]
+    },
+    {
+      "title": "PadelCount",
+      "description": "An application to track and analyze statistics of padel matches.",
+      "technologies": ["HTML", "CSS", "Vue.js"]
+    },
+    {
+      "title": "Que me pongo",
+      "description": "An application that shows the weather forecast and suggests what to wear.",
+      "technologies": ["HTML", "CSS", "React.js", "Weather API", "Geolocation API"]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Winner of Creatividad award",
+      "organization": "Alava Emprende",
+      "year": "2015"
+    },
+    {
+      "title": "Winner of Yuzz Álava",
+      "organization": "CISE",
+      "year": "2015"
+    },
+    {
+      "title": "Top 10 proyectos en Startup4Cities",
+      "organization": "Smart City Expo World Congress",
+      "year": "2015"
+    }
+  ],
+  "talks": [
+    {
+      "title": "Inteligencia Artificial al servicio de los desarrolladores",
+      "date": "Apr 2023",
+      "description": "DataBeers",
+      "link": "https://example.com/talk1",
+      "linkText": "Watch Video"
+    },
+    {
+      "title": "Construye una aplicación web con Django en 15 minutos",
+      "date": "Dec 2020",
+      "description": "PyDay Chile",
+      "link": "https://example.com/talk3",
+      "linkText": "Watch Video"
+    },
+    {
+      "title": "Fututo tecnológico de las ciudades inteligentes",
+      "date": "Nov 2013",
+      "description": "Jornadas de Investigación en Ciencias de la Computación",
+      "link": "https://example.com/talk7",
+      "linkText": "Watch Video"
+    }
+  ],
+  "learning": [
+    {
+      "title": "Advanced React Patterns",
+      "type": "course",
+      "description": "A comprehensive guide to advanced React patterns including render props, HOCs, and hooks.",
+      "link": "https://example.com/course1"
+    },
+    {
+      "title": "Building Accessible Web Applications",
+      "type": "article",
+      "description": "Learn how to build web applications that are accessible to everyone, including people with disabilities.",
+      "link": "https://example.com/article1"
+    },
+    {
+      "title": "JavaScript: The Hard Parts",
+      "type": "video",
+      "description": "A deep dive into JavaScript fundamentals including closures, prototypal inheritance, and async programming.",
+      "link": "https://example.com/video1"
+    },
+    {
+      "title": "System Design for Frontend Engineers",
+      "type": "article",
+      "description": "Learn how to approach system design problems from a frontend perspective.",
+      "link": "https://example.com/article2"
+    },
+    {
+      "title": "Performance Optimization Techniques",
+      "type": "course",
+      "description": "A comprehensive course on optimizing web applications for better performance.",
+      "link": "https://example.com/course2"
+    }
+  ],
+  "contact": {
+    "description": "Feel free to connect with me on social media or send me an email. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.",
+    "links": {
+      "email": {
+        "url": "mailto:hello@example.com",
+        "display": "hello@example.com"
+      },
+      "twitter": {
+        "url": "https://twitter.com",
+        "display": "@developerhandle"
+      },
+      "linkedin": {
+        "url": "https://linkedin.com",
+        "display": "Connect with me"
+      },
+      "github": {
+        "url": "https://github.com",
+        "display": "View my code"
+      }
+    }
+  }
+}

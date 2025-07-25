@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jon Vadillo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111827;
+      --gray: #6b7280;
+      --light-gray: #f3f4f6;
+      --border: #e5e7eb;
+      --badge: #f9fafb;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --text: #f8fafc;
+      --gray: #94a3b8;
+      --light-gray: #1e293b;
+      --border: #334155;
+      --badge: #1e293b;
+    }
+
+    #dark-mode-toggle {
+      display: none;
+    }
+
+    #dark-mode-toggle:checked ~ body,
+    #dark-mode-toggle:checked ~ body *,
+    body:has(#dark-mode-toggle:checked),
+    body:has(#dark-mode-toggle:checked) * {
+      --bg: #0f172a;
+      --text: #f8fafc;
+      --gray: #94a3b8;
+      --light-gray: #1e293b;
+      --border: #334155;
+      --badge: #1e293b;
+    }
+
+    .theme-toggle {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .theme-toggle-slider {
+      position: relative;
+      width: 50px;
+      height: 24px;
+      background: var(--light-gray);
+      border-radius: 12px;
+      transition: background 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .theme-toggle-slider::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      background: var(--text);
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    #dark-mode-toggle:checked ~ header .theme-toggle .theme-toggle-slider::before {
+      transform: translateX(26px);
+    }
+
+    .theme-toggle-icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .theme-toggle-icon.sun {
+      left: 4px;
+      opacity: 1;
+    }
+
+    .theme-toggle-icon.moon {
+      right: 4px;
+      opacity: 0;
+    }
+
+    #dark-mode-toggle:checked ~ header .theme-toggle .theme-toggle-icon.sun {
+      opacity: 0;
+    }
+
+    #dark-mode-toggle:checked ~ header .theme-toggle .theme-toggle-icon.moon {
+      opacity: 1;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 2rem;
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto 0 auto;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    nav {
+      display: flex;
+    }
+
+    nav a {
+      margin-left: 1rem;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+
+    .mobile-nav.active {
+      display: block;
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 0.5rem 0;
+      margin: 0;
+      text-decoration: none;
+      color: var(--gray);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-nav a:last-child {
+      border-bottom: none;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+      color: var(--text);
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+    }
+
+    h2::before {
+      content: "## ";
+      color: var(--gray);
+    }
+
+    .highlight {
+      font-weight: 600;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .badges span {
+      background: var(--badge);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+    }
+
+    .work-entry, .project-entry, .talk-entry, .learning-entry, .footer-entry {
+      background: var(--light-gray);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .work-entry {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .company-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    .work-content {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .work-details h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 0.25rem 0;
+      color: var(--text);
+    }
+
+    .work-details p {
+      margin: 0;
+      color: var(--gray);
+      font-size: 0.875rem;
+    }
+
+    .work-date {
+      color: var(--gray);
+      font-size: 0.875rem;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--gray);
+      margin-top: 3rem;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .project-entry {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+    }
+
+    .project-entry h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem 0;
+      color: var(--text);
+    }
+
+    .project-entry p {
+      color: var(--gray);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 0 0 1rem 0;
+    }
+
+    .project-entry .badges {
+      margin: 0;
+      gap: 0.375rem;
+    }
+
+    .project-entry .badges span {
+      background: var(--light-gray);
+      color: var(--text);
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .award-entry {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .award-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 0.25rem 0;
+      color: var(--text);
+    }
+
+    .award-content p {
+      margin: 0;
+      color: var(--gray);
+      font-size: 0.875rem;
+    }
+
+    .award-year {
+      color: var(--gray);
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: var(--light-gray);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 1rem;
+      }
+
+      header > div:first-child {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+        position: static;
+      }
+
+      nav {
+        display: none;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.125rem;
+        margin: 1.5rem 0 0.75rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .badges span {
+        margin-bottom: 0.25rem;
+      }
+
+      .work-content {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .work-date {
+        text-align: left;
+        align-self: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0.5rem;
+      }
+
+      h1 {
+        font-size: 1.25rem;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      .work-entry, .project-entry, .talk-entry, .learning-entry, .footer-entry {
+        padding: 0.75rem;
+      }
+    }
+
+    .learning-entry {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+    }
+
+    .content-type {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      color: var(--gray);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .content-type-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .learning-entry h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem 0;
+      color: var(--text);
+    }
+
+    .learning-entry p {
+      color: var(--gray);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 0 0 1rem 0;
+    }
+
+    .view-material {
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .view-material:hover {
+      text-decoration: underline;
+    }
+
+    .talk-entry {
+      background: var(--bg);
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .talk-entry:last-child {
+      border-bottom: none;
+    }
+
+    .talk-content {
+      flex: 1;
+    }
+
+    .talk-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 0.25rem 0;
+      color: var(--text);
+    }
+
+    .talk-content p {
+      margin: 0 0 0.25rem 0;
+      color: var(--gray);
+      font-size: 0.875rem;
+    }
+
+    .talk-date {
+      color: var(--gray);
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .talk-link {
+      color: var(--text);
+      font-size: 0.75rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 0.25rem;
+    }
+
+    .talk-link:hover {
+      text-decoration: underline;
+    }
+
+    .intro-section {
+      margin-bottom: 3rem;
+    }
+
+    .intro-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--gray);
+      margin-bottom: 1.3rem;
+    }
+
+    .intro-text:last-of-type {
+      margin-bottom: 2rem;
+      display: inline-block;
+    }
+
+    .social-links {
+      display: inline-flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--light-gray);
+      color: var(--gray);
+      text-decoration: none;
+      font-size: 1.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .social-link:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .intro-highlight {
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <input type="checkbox" id="dark-mode-toggle">
+  <header>
+    <div class="logo">&gt;_jonvadillo</div>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+      <nav>
+        <a href="#">About</a>
+        <a href="#">Experience</a>
+        <a href="#">Projects</a>
+        <a href="#">Talks</a>
+        <a href="#">Learning</a>
+        <a href="#">Contact</a>
+      </nav>
+      <label for="dark-mode-toggle" class="theme-toggle">
+        <div class="theme-toggle-slider">
+          <span class="theme-toggle-icon sun">☀️</span>
+          <span class="theme-toggle-icon moon">🌙</span>
+        </div>
+      </label>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#">About</a>
+      <a href="#">Experience</a>
+      <a href="#">Projects</a>
+      <a href="#">Talks</a>
+      <a href="#">Learning</a>
+      <a href="#">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro-section">
+      <h1>Hi, I'm Jon Vadillo</h1>
+      <p class="intro-text">I am a software developer with over 15 years of experience, specializing in web technologies. I also teach web development, sharing my knowledge with aspiring professionals.</p>
+      <p class="intro-text">During my free time, I enjoy experimenting with new technologies, giving talks, and publishing open resources. Travelling is one of my passions, and I have also had the opportunity to volunteer in different places.</p>
+      <p class="intro-text">I am always eager to learn, explore, and contribute to the tech community.</p>
+      <p class="intro-text">Welcome to my online space, where I share my <span class="highlight">work</span>, <span class="highlight">ideas</span> & <span class="highlight">discoveries</span>.</p>
+      <p class="intro-text">Feel free to get in touch with me on:</p>
+      <div class="social-links">
+        <a href="#" class="social-link" title="Email">📧</a>
+        <a href="#" class="social-link" title="Twitter">🐦</a>
+        <a href="#" class="social-link" title="LinkedIn">💼</a>
+      </div>
+    </div>
+
+    <!-- <h2>Technologies I work with</h2>
+    <div class="badges">
+      <span>JavaScript</span><span>HTML</span><span>CSS</span><span>Python</span><span>PHP</span><span>SQL</span><span>Docker</span><span>Git</span><span>NodeJS</span>
+    </div> -->
+
+    <h2>Work</h2>
+    <div class="work-entry">
+      <div class="company-logo" style="background-color: #e11d48;">E</div>
+      <div class="work-content">
+        <div class="work-details">
+          <h3>Egibide</h3>
+          <p>Professor and Coordinator</p>
+        </div>
+        <div class="work-date">Sept. 2017 – Present</div>
+      </div>
+    </div>
+    <div class="work-entry">
+      <div class="company-logo" style="background-color: #0ea5e9;">GD</div>
+      <div class="work-content">
+        <div class="work-details">
+          <h3>Gesto Deportivo</h3>
+          <p>Software Engineer & Co-Founder</p>
+        </div>
+        <div class="work-date">Nov. 2017 – Present</div>
+      </div>
+    </div>
+    <div class="work-entry">
+      <div class="company-logo" style="background-color: #10b981;">E</div>
+      <div class="work-content">
+        <div class="work-details">
+          <h3>EJIE</h3>
+          <p>Development Technical Assistance</p>
+        </div>
+        <div class="work-date">Sept. 2013 – Sept. 2017</div>
+      </div>
+    </div>
+    <div class="work-entry">
+      <div class="company-logo" style="background-color: #f59e0b;">K</div>
+      <div class="work-content">
+        <div class="work-details">
+          <h3>Konekta</h3>
+          <p>Programmer Analyst</p>
+        </div>
+        <div class="work-date">Mar. 2016 – Apr. 2016</div>
+      </div>
+    </div>
+    <div class="work-entry">
+      <div class="company-logo" style="background-color: #8b5cf6;">WS</div>
+      <div class="work-content">
+        <div class="work-details">
+          <h3>WorldSensing S.L.N.E</h3>
+          <p>Software Engineer (Fullstack)</p>
+        </div>
+        <div class="work-date">Jul. 2010 – Jun. 2012</div>
+      </div>
+    </div>
+    <div class="work-entry">
+      <div class="company-logo" style="background-color: #06b6d4;">V</div>
+      <div class="work-content">
+        <div class="work-details">
+          <h3>Voycentigo</h3>
+          <p>Co-founder & Software Engineer</p>
+        </div>
+        <div class="work-date">Jul. 2009 – Feb. 2011</div>
+      </div>
+    </div>
+    <div class="work-entry">
+      <div class="company-logo" style="background-color: #ef4444;">D</div>
+      <div class="work-content">
+        <div class="work-details">
+          <h3>Desuto Mobile Solutions</h3>
+          <p>Software Developer</p>
+        </div>
+        <div class="work-date">Jan. 2008 – Oct. 2008</div>
+      </div>
+    </div>
+
+    <h2>Side Projects</h2>
+    <div class="grid">
+      <div class="project-entry">
+        <h3>Traivel</h3>
+        <p>An application that generates complete travel itineraries based on user preferences.</p>
+        <div class="badges">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>Vue.js</span>
+          <span>Python</span>
+          <span>OpenAI API</span>
+        </div>
+      </div>
+      <div class="project-entry">
+        <h3>Eureka Girls</h3>
+        <p>A game designed to introduce inspiring women in the STEM field. The goal is to match women with their achievements (available in single-player or two-player mode).</p>
+        <div class="badges">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>React.js</span>
+          <span>Supabase</span>
+        </div>
+      </div>
+      <div class="project-entry">
+        <h3>Landatu</h3>
+        <p>An IoT system for sensing and monitoring vegetable gardens.</p>
+        <div class="badges">
+          <span>Arduino</span>
+          <span>Raspberry Pi</span>
+          <span>Python</span>
+          <span>SQL</span>
+          <span>HTML</span>
+          <span>CSS</span>
+        </div>
+      </div>
+      <div class="project-entry">
+        <h3>Ikasi</h3>
+        <p>A game to learn words and numbers in Basque (Euskara).</p>
+        <div class="badges">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JS</span>
+        </div>
+      </div>
+      <div class="project-entry">
+        <h3>PadelCount</h3>
+        <p>An application to track and analyze statistics of padel matches.</p>
+        <div class="badges">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JS</span>
+        </div>
+      </div>
+      <div class="project-entry">
+        <h3>Que me pongo</h3>
+        <p>An application that shows the weather forecast and suggests what to wear.</p>
+        <div class="badges">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>Weather API</span>
+          <span>Geolocation API</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Awards</h2>
+    <div class="awards-grid">
+      <div class="award-entry">
+        <div class="award-content">
+          <h3>Creatividad Award</h3>
+          <p>Álava Emprende</p>
+          <span class="award-year">2015</span>
+        </div>
+      </div>
+      <div class="award-entry">
+        <div class="award-content">
+          <h3>Winner Yuzz Álava</h3>
+          <p>Cise</p>
+          <span class="award-year">2015</span>
+        </div>
+      </div>
+      <div class="award-entry">
+        <div class="award-content">
+          <h3>Startup4Cities finalist (top 12 Projects in Spain)</h3>
+          <p>Smart City Expo World Congress</p>
+          <span class="award-year">2015</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>Talks</h2>
+    <div class="talk-entry">
+      <div class="talk-content">
+        <h3>Inteligencia Artificial al servicio de los desarrolladores</h3>
+        <p>Databeers</p>
+        <a href="#" class="talk-link">📺 Watch Video</a>
+      </div>
+      <div class="talk-date">Apr 2023</div>
+    </div>
+    <div class="talk-entry">
+      <div class="talk-content">
+        <h3>Construye una aplicación web con Django en 15 minutos</h3>
+        <p>PyDay Chile</p>
+        <a href="#" class="talk-link">📺 Watch Video</a>
+      </div>
+      <div class="talk-date">Dec 2020</div>
+    </div>
+    <div class="talk-entry">
+      <div class="talk-content">
+        <h3>Futuro tecnológico de las ciudades inteligentes</h3>
+        <p>Jornadas de Investigación en Ciencias de la Computación</p>
+        <a href="#" class="talk-link">📺 Watch Video</a>
+      </div>
+      <div class="talk-date">Nov 2013</div>
+    </div>
+
+    <h2>Learning Material</h2>
+    <div class="grid">
+      <div class="learning-entry">
+        <div class="content-type">
+          <span class="content-type-icon">📚</span>
+          <span>COURSE</span>
+        </div>
+        <h3>Advanced React Patterns</h3>
+        <p>A comprehensive guide to advanced React patterns including render props, HOCs, and hooks.</p>
+        <a href="#" class="view-material">View Material →</a>
+      </div>
+      <div class="learning-entry">
+        <div class="content-type">
+          <span class="content-type-icon">📄</span>
+          <span>ARTICLE</span>
+        </div>
+        <h3>Building Accessible Web Applications</h3>
+        <p>Learn how to build web applications that are accessible to everyone, including people with disabilities.</p>
+        <a href="#" class="view-material">View Material →</a>
+      </div>
+      <div class="learning-entry">
+        <div class="content-type">
+          <span class="content-type-icon">📹</span>
+          <span>VIDEO</span>
+        </div>
+        <h3>JavaScript: The Hard Parts</h3>
+        <p>A deep dive into JavaScript fundamentals including closures, prototypal inheritance, and async programming.</p>
+        <a href="#" class="view-material">View Material →</a>
+      </div>
+      <div class="learning-entry">
+        <div class="content-type">
+          <span class="content-type-icon">📄</span>
+          <span>ARTICLE</span>
+        </div>
+        <h3>System Design for Frontend Engineers</h3>
+        <p>Learn how to approach system design problems from a frontend perspective.</p>
+        <a href="#" class="view-material">View Material →</a>
+      </div>
+      <div class="learning-entry">
+        <div class="content-type">
+          <span class="content-type-icon">📚</span>
+          <span>COURSE</span>
+        </div>
+        <h3>Performance Optimization Techniques</h3>
+        <p>A comprehensive course on optimizing web applications for better performance.</p>
+        <a href="#" class="view-material">View Material →</a>
+      </div>
+    </div>
+
+    <h2>Contact</h2>
+    <p>Open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+    <div class="grid">
+      <div class="footer-entry">Email<br>hello@example.com</div>
+      <div class="footer-entry">Twitter<br>@developerhandle</div>
+      <div class="footer-entry">LinkedIn<br>Connect with me</div>
+      <div class="footer-entry">GitHub<br>View my code</div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Developer. All rights reserved.
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('active');
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileNav = document.getElementById('mobileNav');
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      
+      if (!mobileNav.contains(event.target) && !toggle.contains(event.target)) {
+        mobileNav.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
