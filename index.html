@@ -138,7 +138,7 @@
 
     .logo {
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.125rem;
     }
 
     nav {
@@ -387,16 +387,10 @@
       }
 
       header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-bottom: 1rem;
-      }
-
-      header > div:first-child {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
+        flex-direction: row;
         align-items: center;
+        justify-content: space-between;
+        padding-bottom: 1rem;
       }
 
       .mobile-menu-toggle {
@@ -438,7 +432,7 @@
 
     @media (max-width: 480px) {
       body {
-        padding: 0.5rem;
+        padding: 1.25rem;
       }
 
       h1 {
@@ -720,8 +714,6 @@
   <header>
     <div class="logo">&gt;_jonvadillo</div>
     <div style="display: flex; align-items: center; gap: 1rem;">
-      
-      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
       <nav>
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
@@ -736,6 +728,7 @@
           <span class="theme-toggle-icon moon">🌙</span>
         </div>
       </label>
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
     </div>
     <div class="mobile-nav" id="mobileNav">
       <a href="#about">About</a>
