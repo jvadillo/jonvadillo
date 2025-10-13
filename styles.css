@@ -191,7 +191,7 @@ nav a:hover {
 }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
   margin-top: 2rem;
@@ -330,11 +330,23 @@ footer {
 
 .award-entry {
   background: var(--bg);
-  border: 1px solid var(--border);
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  margin-bottom: 1rem;
-  display: block;
+  border: none;
+  /* border-bottom: 1px solid var(--border); */
+  padding: 1rem 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.award-entry:last-child {
+  border-bottom: none;
+}
+
+.award-content {
+  flex: 1;
 }
 
 .award-content h3 {
@@ -344,27 +356,27 @@ footer {
   color: var(--text);
 }
 
-.award-content p {
-  margin: 0;
+.award-content p, .award-content span {
   color: var(--gray);
   font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0 0 0.25rem 0;
 }
 
-.award-year {
-  color: var(--gray);
+.award-content .award-badge {
+  background: var(--light-gray);
+  color: var(--text);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
   font-size: 0.75rem;
   font-weight: 500;
-  background: var(--light-gray);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  margin-top: 0.5rem;
-  display: inline-block;
+  margin-right: 0.75rem;
 }
 
-.awards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+.award-date {
+  color: var(--gray);
+  font-size: 0.75rem;
+  white-space: nowrap;
 }
 
 .grid {
@@ -555,8 +567,8 @@ footer {
 .talk-entry {
   background: var(--bg);
   border: none;
-  border-bottom: 1px solid var(--border);
-  padding: 1.5rem 0;
+  /* border-bottom: 1px solid var(--border); */
+  padding: 1rem 0;
   border-radius: 0;
   margin-bottom: 0;
   display: flex;
@@ -627,7 +639,7 @@ footer {
 }
 
 .intro-section {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .intro-text {
@@ -674,15 +686,44 @@ footer {
 /* Terminal Styles */
 .terminal-section {
   margin: 3rem 0;
-  text-align: center;
+  padding: 2rem;
+  background: var(--light-gray);
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.terminal-intro {
+  flex: 1;
+}
+
+.terminal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--text);
+}
+
+.terminal-title::before {
+  display: none;
+}
+
+.terminal-subtitle {
+  font-size: 1rem;
+  color: var(--gray);
+  margin: 0;
+  line-height: 1.5;
 }
 
 .terminal-toggle-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
   background: var(--text);
   color: var(--bg);
   border: none;
@@ -691,10 +732,24 @@ footer {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-weight: 500;
   transition: all 0.2s ease;
-  margin-bottom: 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .terminal-toggle-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.terminal-icon {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+.terminal-arrow {
+  transition: transform 0.2s ease;
+}
+
+.terminal-toggle-btn:hover .terminal-arrow {
+  transform: translateX(2px);
 }
