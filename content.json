@@ -116,6 +116,21 @@
       "technologies": ["HTML", "CSS", "React.js", "Supabase"]
     },
     {
+      "title": "Radar Morado",
+      "description": "An interactive game for 25N (International Day for the Elimination of Violence against Women) that challenges users to spot good treatment, warning signs and gender-based violence in realistic chats.",
+      "technologies": ["HTML", "CSS", "JS"]
+    },
+    {
+      "title": "Idazten",
+      "description": "A roll-the-dice-and-write game designed to encourage writing among 5 and 6 year old children.",
+      "technologies": ["React.js", "CSS", "PWA"]
+    },
+    {
+      "title": "Margotu",
+      "description": "An app for kids to learn how to draw animals step by step and color them in.",
+      "technologies": ["HTML", "CSS", "JS", "PWA"]
+    },
+    {
       "title": "Landatu",
       "description": "An IoT system for sensing and monitoring vegetable gardens.",
       "technologies": ["Arduino", "Raspberry", "C", "Python", "SQL", "HTML", "CSS", "JS"]

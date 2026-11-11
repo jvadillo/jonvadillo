@@ -307,6 +307,30 @@ footer {
   color: var(--text);
 }
 
+.project-entry h3 a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.project-entry h3 a::after {
+  content: "↗";
+  font-size: 0.875rem;
+  color: var(--gray);
+  transition: transform 0.2s ease;
+}
+
+.project-entry h3 a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.project-entry h3 a:hover::after {
+  transform: translate(2px, -2px);
+}
+
 .project-entry p {
   color: var(--gray);
   font-size: 0.875rem;
